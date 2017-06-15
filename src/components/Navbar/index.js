@@ -3,7 +3,7 @@ import styled from 'styled-components'
 import Button from '../Button'
 
 const Nav = styled.nav`
-  background-color: #026AA7;
+  background-color: ${props => props.theme.pallete.primary_dark};
   padding: 10px;
   color: white;
   text-align: center;
