@@ -2,7 +2,7 @@ import React from 'react'
 import Button from '../Button'
 import styled from 'styled-components'
 
-const Footer = styled.div`
+const FooterWrapper = styled.div`
   padding: 20px 5px 5px 5px;
   color: #8c8c8c;
   border-bottom-left-radius: 5px;
@@ -10,16 +10,37 @@ const Footer = styled.div`
   background-color: ${props => props.theme.pallete.light_grey};
   display: flex;
 
-  // cursor: pointer;
-  // &:hover {
-  //   color: black;
-  //   text-decoration: underline;
-  //   background-color: ${props => props.theme.pallete.dark_grey};
-  // }
+  ${props => props.standard && `
+    cursor: pointer;
+    &:hover {
+      color: black;
+      text-decoration: underline;
+      background-color: ${props.theme.pallete.dark_grey};
+    }
+  `}
 `
 
-export default ({handleAddClick}) => (
-  <Footer>
-    <Button confirm onClick={handleAddClick}>Add</Button>
-  </Footer>
+const StandardFooter = ({toggleCompose, handleEnter}) => (
+  <FooterWrapper
+    standard
+    onClick={toggleCompose}
+  >
+    <div>Add a card ...</div>
+  </FooterWrapper>
+)
+
+const ComposerFooter = ({addCard, toggleCompose}) => (
+  <FooterWrapper>
+    <Button confirm onClick={addCard}>Add</Button>
+  </FooterWrapper>
+)
+
+export default ({addCard, composing, toggleCompose, handleEnter}) => (
+  <div>
+    {
+    composing
+    ? <ComposerFooter {...{addCard, toggleCompose, handleEnter}} />
+    : <StandardFooter {...{toggleCompose}} />
+  }
+  </div>
 )

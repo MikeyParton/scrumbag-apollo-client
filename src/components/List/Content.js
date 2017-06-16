@@ -13,12 +13,12 @@ export default ({cards, composing, handleInputChange}) => (
   <ContentWrapper>
     {
       cards.map(card => {
-        return <Card {...card} />
+        return <Card key={card.id} {...card} />
       })
     }
     {
       composing
-      && <CardComposer handleInputChange={handleInputChange} />
+      && <CardComposer {...{handleInputChange}} />
     }
   </ContentWrapper>
 )
