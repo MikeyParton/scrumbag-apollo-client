@@ -1,55 +1,20 @@
 import React from 'react'
-import Card from '../Card'
-import styled from 'styled-components'
-import Button from '../Button'
-
-const ListWrapper = styled.div`
-  margin-right: 20px;
-  width: 300px;
-  max-height: 100%;
-  display: flex;
-  flex-direction: column;
-`
-const ListHeader = styled.div`
-  border-top-left-radius: 5px;
-  border-top-right-radius: 5px;
-  padding: 5px 5px 20px 5px;
-  background-color: ${props => props.theme.pallete.light_grey};
-`
-
-const ListContent = styled.div`
-  max-height: calc(100% - 106px);
-  overflow-y: scroll;
-  padding: 5px;
-  background-color: ${props => props.theme.pallete.light_grey};
-`
-
-const ListFooter = styled.div`
-  padding: 20px 5px 5px 5px;
-  color: #8c8c8c;
-  border-bottom-left-radius: 5px;
-  border-bottom-right-radius: 5px;
-  background-color: ${props => props.theme.pallete.light_grey};
-  display: flex;
-
-  // cursor: pointer;
-  // &:hover {
-  //   color: black;
-  //   text-decoration: underline;
-  //   background-color: ${props => props.theme.pallete.dark_grey};
-  // }
-`
+import ListWrapper from './ListWrapper'
+import Content from './Content'
+import Header from './Header'
+import Footer from './Footer'
 
 const AddLink = (props) => {
-  <ListFooter>
+  <Footer>
     Add a card ...
-  </ListFooter>
+  </Footer>
 }
 
 export default class List extends React.Component {
   constructor (props) {
     super(props)
     this.state = {
+      title: 'Suggestions',
       newCardTitle: '',
       composing: false,
       cards: [
@@ -83,34 +48,13 @@ export default class List extends React.Component {
   }
 
   render () {
+    const { cards, composing, title } = this.state
+    const { handleInputChange, handleAddClick } = this
     return (
       <ListWrapper>
-        <ListHeader>
-          <strong>Suggestions</strong>
-        </ListHeader>
-        <ListContent>
-          {
-            this.state.cards.map(card => {
-              return <Card {...card} />
-            })
-          }
-          {
-            this.state.composing && (
-              <Card
-                composing
-                handleInputChange={this.handleInputChange}
-              />
-            )
-          }
-        </ListContent>
-        <ListFooter>
-          <Button
-            confirm
-            onClick={this.handleAddClick}
-          >
-            Add
-          </Button>
-        </ListFooter>
+        <Header {...{title}} />
+        <Content {...{cards, composing, handleInputChange}} />
+        <Footer {...{handleAddClick}} />
       </ListWrapper>
     )
   }

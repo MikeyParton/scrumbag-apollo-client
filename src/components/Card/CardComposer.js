@@ -1,9 +1,12 @@
 import React from 'react'
+import CardWrapper from './CardWrapper'
 
-export default ({ value, handleInputChange }) => (
-  <textarea
-    onChange={handleInputChange}
-    rows='3'
-    autoFocus='true'
-  />
+export const CardComposer = ({ value, handleInputChange }) => (
+  <CardWrapper>
+    <textarea
+      onChange={handleInputChange}
+      rows='3'
+      autoFocus='true'
+    />
+  </CardWrapper>
 )
